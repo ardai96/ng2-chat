@@ -1,0 +1,14 @@
+<div class="form" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Wiadomość</mat-label>
+  <input #messageInput (keyup.enter)="sendMessage()" formControlName="message" matInput placeholder="Napisz wiadomość...">
+</mat-form-field>
+<div class="buttons">
+  <button mat-icon-button>
+    <mat-icon>attachment</mat-icon>
+  </button>
+  <button class="send" (click)="sendMessage()" mat-icon-button>
+    <mat-icon>send</mat-icon>
+  </button>
+</div>
+</div>

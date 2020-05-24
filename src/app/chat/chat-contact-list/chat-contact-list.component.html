@@ -1,0 +1,13 @@
+<div class="side-menu-header">
+  <div class="header">
+    <span>Czat</span>
+    <button mat-icon-button>
+      <mat-icon>add_circle_outline</mat-icon>
+    </button>
+  </div>
+  <app-search></app-search>
+</div>
+<div class="contact-list-container">
+  <app-chat-contact-list-item [ngClass]="{'active': item.id === activeChat.id}"
+    *ngFor="let item of chatItems | async" [chatItem]="item"></app-chat-contact-list-item>
+</div>

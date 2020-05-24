@@ -1,0 +1,39 @@
+@import "../../../../styles.scss";
+
+:host {
+  margin: 16px 36px;
+  display: flex;
+  border-bottom: 1px solid $light-grey;
+
+  .image-wrapper {
+    width: 40px;
+    margin-right: 16px;
+
+    img {
+      width: 100%;
+      border-radius: 50%;
+      border: 1px solid $light-grey;
+    }
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+
+    .name {
+      font-weight: 500;
+    }
+
+    .status {
+        font-size: 12px;
+
+        &.online {
+            color: $green;
+        }
+    }
+  }
+
+  .menu {
+    margin-left: auto;
+  }
+}

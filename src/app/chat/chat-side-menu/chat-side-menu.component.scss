@@ -1,0 +1,30 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 16px;
+
+    .chat-logo {
+        font-size: 36px;
+        height: 36px;
+        width: 36px;
+    }
+
+    .buttons-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 32px;
+    }
+
+    .user-menu {
+        margin-top: auto;
+        height: 48px;
+        width: 48px;
+
+        mat-icon {
+            font-size: 36px;
+            height: 36px;
+            width: 36px;
+        }
+    }
+}

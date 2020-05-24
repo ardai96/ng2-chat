@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/theming";
+@include mat-core();
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+$light-grey: #80808036;
+$grey: grey;
+$green: #00a200;
+$blue: #1f1fb7ad;
+
+$teal: mat-palette($mat-teal, 400);
+$light-teal: #00808021;
+
+$form-primary: mat-palette($mat-teal, 400);
+$form-accent: mat-palette($mat-orange, 900);
+$form-warn: mat-palette($mat-pink, 900);
+$form-theme: mat-light-theme($form-primary, $form-accent, $form-warn);
+
+@include mat-form-field-theme($form-theme); // Form-Field theme
+@include mat-input-theme($form-theme); // Input Theme
+
+
+button:hover mat-icon {
+    color: map-get($map: $teal, $key: 400);
+}
