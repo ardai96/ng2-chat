@@ -7,7 +7,7 @@
       {{message?.user?.name}}
     </div>
     <div class="date">
-      {{message?.date}}
+      {{message?.date | date: 'short'}}
     </div>
   </div>
 </div>
