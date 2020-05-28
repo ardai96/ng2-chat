@@ -1,3 +1,3 @@
 <app-chat-content-header [activeChat]="activeChat"></app-chat-content-header>
-<app-chat-content-scrollable [messages]="activeChat.messages"></app-chat-content-scrollable>
+<app-chat-content-scrollable [messages]="messages$ | async"></app-chat-content-scrollable>
 <app-chat-content-message-sender></app-chat-content-message-sender>

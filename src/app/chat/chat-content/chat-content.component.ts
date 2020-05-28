@@ -1,5 +1,6 @@
+import { ChatModule } from './../chat.module';
 import { takeUntil, tap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { ChatFacade } from './../chat.facade';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
@@ -10,6 +11,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class ChatContentComponent implements OnInit, OnDestroy {
   public activeChat: ChatModule.Chat;
+  public messages$: Observable<ChatModule.ChatMessage[]>;
 
   private destroy$: Subject<undefined> = new Subject();
 
@@ -20,6 +22,8 @@ export class ChatContentComponent implements OnInit, OnDestroy {
       .getActiveChat()
       .pipe(takeUntil(this.destroy$))
       .subscribe((activeChat) => (this.activeChat = activeChat));
+
+    this.messages$ = this.chatFacade.getChatMessages();
   }
 
   ngOnDestroy(): void {
