@@ -1,0 +1,29 @@
+@import "../../../styles.scss";
+
+:host {
+  width: 300px;
+  border: 1px solid $light-grey;
+
+  .side-menu-header {
+    margin: 32px 16px;
+    margin-top: 16px;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+
+      span {
+        font-size: 24px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .contact-list-container {
+    .active {
+      background-color: $light-teal;
+    }
+  }
+}

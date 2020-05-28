@@ -1,0 +1,25 @@
+<div class="image-wrapper">
+  <img [src]="activeChat?.avatar"/>
+</div>
+<div class="header">
+  <div class="name">
+    {{activeChat?.name}}
+  </div>
+  <div class="status" [ngClass]="'online'">
+    Online
+  </div>
+</div>
+<button mat-icon-button [matMenuTriggerFor]="menu" class="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <span>Profil</span>
+  </button>
+  <button mat-menu-item>
+    <span>Usun kontakt</span>
+  </button>
+  <button mat-menu-item>
+    <span>Zablokuj</span>
+  </button>
+</mat-menu>

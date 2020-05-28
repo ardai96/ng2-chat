@@ -1,0 +1,16 @@
+<div class="author">
+  <div class="image-wrapper">
+    <img [src]="message?.user?.avatar"/>
+  </div>
+  <div class="header">
+    <div class="name">
+      {{message?.user?.name}}
+    </div>
+    <div class="date">
+      {{message?.date}}
+    </div>
+  </div>
+</div>
+<div class="message" [ngClass]="{'my-message': message.user.id === user.id}">
+  {{message.message}}
+</div>

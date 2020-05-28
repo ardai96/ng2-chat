@@ -1,0 +1,3 @@
+<app-chat-message [ngClass]="{'my-message': message.user.id === user.id}" *ngFor="let message of messages"
+  [message]="message" [user]="user">
+</app-chat-message>
