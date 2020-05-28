@@ -6,7 +6,7 @@ import { Environment } from './environment.model';
 export const environment: Environment = {
   production: false,
   SOCKET_SERVER: 'https://chat-for-uam-students.herokuapp.com/',
-  jwt: 'tutaj-wklej-otrzymany-token'
+  jwt: 'igor-zablotny'
 };
 
 /*
