@@ -1,3 +1,4 @@
+import { ChatFacade } from './chat.facade';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private readonly chatFacade: ChatFacade
+  ) { }
 
   ngOnInit() {
+    this.chatFacade.initConnection();
   }
 
 }

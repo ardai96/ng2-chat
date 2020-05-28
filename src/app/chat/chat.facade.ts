@@ -1,11 +1,41 @@
+import { selectChatMessages } from './store/chat.selectors';
+import { SocketService } from './socket/socket.service';
+import {
+  actionInitConnection,
+  actionAddNewMessage,
+  actionSendChatMessage,
+} from './store/chat.actions';
 import { MOCK_USER } from './../user.facade';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { SocketEvent } from './socket/socket-event.enum';
 
 @Injectable()
 export class ChatFacade {
-  constructor() {}
+  constructor(
+    private readonly store: Store,
+    private readonly socketService: SocketService
+  ) {}
+
+  public initConnection(): void {
+    this.store.dispatch(actionInitConnection());
+
+    this.socketService
+      .onEvent(SocketEvent.MESSAGE)
+      .subscribe((message) =>
+        this.store.dispatch(actionAddNewMessage(message as ChatModule.ChatMessage))
+      );
+  }
+
+  public getChatMessages(): Observable<ChatModule.ChatMessage[]> {
+    return this.store.select(selectChatMessages);
+  }
+
+  public sendMessage(message: ChatModule.SendMessageDTO): void {
+    this.store.dispatch(actionSendChatMessage(message));
+  }
 
   public getChatList(): Observable<ChatModule.Chat[]> {
     return MOCK_DATA;
@@ -40,10 +70,9 @@ const MOCK_DATA = of([
           avatar: 'https://randomuser.me/api/portraits/men/99.jpg',
         },
         date: '12:19',
-        message:
-          `Dlaczego facebook wymyslił fluxa i podstawy NGRX-a, ale tego nie skończyliśmy.
+        message: `Dlaczego facebook wymyslił fluxa i podstawy NGRX-a, ale tego nie skończyliśmy.
           W przyszlym tygodniu mamy juz programować 😍`,
-      }
+      },
     ],
   },
   {
