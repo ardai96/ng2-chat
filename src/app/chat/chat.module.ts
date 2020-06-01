@@ -1,3 +1,6 @@
+import { ChatEffects } from './store/chat.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChatContentMessageSenderComponent } from './chat-content/chat-content-message-sender/chat-content-message-sender.component';
@@ -18,6 +21,7 @@ import { CommonModule } from '@angular/common';
 import { ChatComponent } from './chat.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
+import { chatReducer } from './store/chat.reducer';
 
 @NgModule({
   imports: [
@@ -29,7 +33,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     SearchModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature('chat', chatReducer),
+    EffectsModule.forFeature([ChatEffects])
   ],
   declarations: [
     ChatComponent,
