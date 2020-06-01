@@ -13,7 +13,7 @@ export class UserFacade {
   }
 
   public getUser(): Observable<ChatModule.ChatUser> {
-    return this.store.pipe(select(selectUser), tap(console.log));
+    return this.store.pipe(select(selectUser), tap(console.log)) as Observable<ChatModule.ChatUser>;
   }
 }
 

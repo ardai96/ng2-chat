@@ -1,18 +1,49 @@
-import { MOCK_USER } from './../user.facade';
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {MOCK_USER} from '../user.facade';
+import {Injectable, OnDestroy} from '@angular/core';
+import {Observable, of, Subscription} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {SocketService} from "./socket/socket.service";
+import {Store} from "@ngrx/store";
+import {addNewMessageAction, initConnectionAction, sendChatMessageAction} from "./store/chat.actions";
+import {selectChatMessages} from "./store/chat.selector";
+import {SocketEvent} from "./socket/socket-event.enum";
+import ChatMessage = ChatModule.ChatMessage;
+import SendMessageDTO = ChatModule.SendMessageDTO;
 
 @Injectable()
-export class ChatFacade {
-  constructor() {}
+export class ChatFacade implements OnDestroy {
+  private messagesSubscription: Subscription;
+  constructor(private socketService: SocketService,
+              private store: Store) {
+  }
 
   public getChatList(): Observable<ChatModule.Chat[]> {
     return MOCK_DATA;
   }
 
+  public initConnection(): void {
+    this.store.dispatch(initConnectionAction());
+    this.messagesSubscription = this.socketService
+      .onEvent(SocketEvent.MESSAGE)
+      .subscribe(message => this.store.dispatch(addNewMessageAction(message as ChatMessage)));
+  }
+
+  public getMessages(): Observable<ChatMessage[]> {
+    return this.store.select(selectChatMessages);
+  }
+
+  public sendMessage(message: SendMessageDTO): void {
+    this.store.dispatch(sendChatMessageAction(message));
+  }
+
   public getActiveChat(): Observable<ChatModule.Chat> {
     return MOCK_DATA.pipe(map((data: ChatModule.Chat[]) => data[0]));
+  }
+
+  ngOnDestroy(): void {
+    if (this.messagesSubscription) {
+      this.messagesSubscription.unsubscribe();
+    }
   }
 }
 

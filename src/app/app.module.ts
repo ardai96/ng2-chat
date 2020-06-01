@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {StoreModule} from "@ngrx/store";
 import * as fromUser from './user/user.reducer';
+import {EffectsModule} from "@ngrx/effects";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import * as fromUser from './user/user.reducer';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({user: fromUser.userReducer})
+    StoreModule.forRoot({user: fromUser.userReducer}),
+    EffectsModule.forRoot([]),
   ],
   providers: [
     { provide: ENVIRONMENT, useValue: environment }

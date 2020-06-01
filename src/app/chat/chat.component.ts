@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ChatFacade} from './chat.facade';
 
 @Component({
   selector: 'app-chat',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  constructor() { }
+  constructor(private facade: ChatFacade) { }
 
   ngOnInit() {
+    this.facade.initConnection();
   }
 
 }
