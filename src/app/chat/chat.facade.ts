@@ -1,12 +1,41 @@
+import { selectChatMessages } from './store/chat.selectors';
+import { SocketService } from './socket/socket.service';
+import {
+  actionInitConnection,
+  actionAddMessage,
+  actionSendChatMessage,
+} from './store/chat.actions';
 import { MOCK_USER } from './../user.facade';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { SocketEvent } from './socket/socket-event.enum';
 
 @Injectable()
 export class ChatFacade {
-  constructor() {}
+  constructor(
+    private readonly store: Store,
+    private readonly socketService: SocketService
+  ) {}
 
+  public initConnection(): void {
+    this.store.dispatch(actionInitConnection());
+
+    this.socketService
+      .onEvent(SocketEvent.MESSAGE)
+      .subscribe((message) =>
+        this.store.dispatch(actionAddMessage(message as ChatModule.ChatMessage))
+      );
+  }
+
+  public getChatMessages(): Observable<ChatModule.ChatMessage[]> {
+    return this.store.select(selectChatMessages);
+  }
+
+  public sendMessage(message: ChatModule.SendMessageDTO): void {
+    this.store.dispatch(actionSendChatMessage(message));
+  }
   public getChatList(): Observable<ChatModule.Chat[]> {
     return MOCK_DATA;
   }
