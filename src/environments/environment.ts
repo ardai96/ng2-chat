@@ -7,7 +7,7 @@ const DK = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRGF3aWQgS2VkemllcnN
 
 export const environment: Environment = {
   production: false,
-  SOCKET_SERVER: 'https://chat-for-uam-students.herokuapp.com/',
+  SOCKET_SERVER: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWljcm9zNkBzdC5hbXUuZWR1LnBsIiwiYXZhdGFyIjoiaHR0cHM6Ly9yYW5kb211c2VyLm1lL2FwaS9wb3J0cmFpdHMvbWVuLzMyLmpwZyIsImlkIjoxNCwiaWF0IjoxNTkwNDEzNDcyLCJleHAiOjE2MjE5NDk0NzJ9.mFVWZbm2rMONFm5JdjiiC4zbl7qrFj82M9VPCwc7zXM',
   jwt: Math.random() > 0.5 ? MK : DK
 };
 
