@@ -6,7 +6,7 @@ import { Environment } from './environment.model';
 export const environment: Environment = {
   production: false,
   SOCKET_SERVER: 'https://chat-for-uam-students.herokuapp.com/',
-  jwt: 'tutaj-wklej-otrzymany-token'
+  jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWFyemFyNUBzdC5hbXUuZWR1LnBsIiwiYXZhdGFyIjoiaHR0cHM6Ly9yYW5kb211c2VyLm1lL2FwaS9wb3J0cmFpdHMvbWVuLzIxLmpwZyIsImlkIjozLCJpYXQiOjE1OTA0MTMyNjAsImV4cCI6MTYyMTk0OTI2MH0.FIOJ7UuIcZDaK9R3tgVClblDKICqvU4G90jxy3qs7O8'
 };
 
 /*
