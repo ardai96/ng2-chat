@@ -1,3 +1,4 @@
+import { ChatFacade } from './../../chat.facade';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
@@ -15,6 +16,7 @@ export class ChatContentMessageSenderComponent implements OnInit, AfterViewInit 
 
   constructor(
     private readonly formBuilder: FormBuilder,
+    private readonly chatFacade: ChatFacade
   ) { }
 
   ngOnInit() {
@@ -30,6 +32,8 @@ export class ChatContentMessageSenderComponent implements OnInit, AfterViewInit 
   public sendMessage(): void {
 
     console.log('MESSAGE SEND!');
+
+    this.chatFacade.sendMessage(this.form.value);
 
     this.form.reset();
     this.messageInput.nativeElement.focus();
