@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {ChatFacade} from "../../chat.facade";
 
 @Component({
   selector: 'app-chat-content-message-sender',
@@ -8,14 +9,15 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class ChatContentMessageSenderComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('messageInput', { static: false })
+  @ViewChild('messageInput', {static: false})
   messageInput: ElementRef;
 
   public form: FormGroup;
 
-  constructor(
-    private readonly formBuilder: FormBuilder,
-  ) { }
+  constructor(private readonly formBuilder: FormBuilder,
+              private facade: ChatFacade
+  ) {
+  }
 
   ngOnInit() {
     this.createForm();
@@ -28,9 +30,8 @@ export class ChatContentMessageSenderComponent implements OnInit, AfterViewInit 
   }
 
   public sendMessage(): void {
-
     console.log('MESSAGE SEND!');
-
+    this.facade.sendMessage(this.form.value);
     this.form.reset();
     this.messageInput.nativeElement.focus();
   }

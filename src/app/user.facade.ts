@@ -1,17 +1,19 @@
-import { ChatModule } from './chat/chat.module';
-import { environment } from './../environments/environment';
-import { Injectable } from '@angular/core';
-import { of, Observable } from 'rxjs';
-import * as jwtDecode from 'jwt-decode';
+import {ChatModule} from './chat/chat.module';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {select, Store} from "@ngrx/store";
+import {selectUser} from "./user/user.selector";
+import {tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserFacade {
-  constructor() {}
+  constructor(private store: Store) {
+  }
 
   public getUser(): Observable<ChatModule.ChatUser> {
-    return of(jwtDecode(environment.jwt));
+    return this.store.pipe(select(selectUser), tap(console.log)) as Observable<ChatModule.ChatUser>;
   }
 }
 
